@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Explorador de Países e Culturas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="brand">🌍 Explorador de Países</h1>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="#explorar" class="nav-link">Explorar</a>
+        <a href="#favoritos" class="nav-link">Favoritos</a>
+        <a href="#sobre" class="nav-link">Sobre</a>
+      </nav>
+    </div>
+    <div class="container searchbar">
+      <label class="search-label" for="search-input">🔍 Buscar país</label>
+      <div class="search-row">
+        <input id="search-input" type="search" name="search" placeholder="Ex.: Brasil, França, Japão" aria-label="Buscar país por nome" data-role="search" />
+        <select id="continent-filter" aria-label="Filtrar por continente" data-role="filter">
+          <option value="">Todos os continentes</option>
+          <option value="Africa">África</option>
+          <option value="Americas">América</option>
+          <option value="Asia">Ásia</option>
+          <option value="Europe">Europa</option>
+          <option value="Oceania">Oceania</option>
+          <option value="Antarctic">Antártica</option>
+        </select>
+        <button class="btn btn-secondary" aria-label="Limpar filtros e busca">Limpar</button>
+      </div>
+      <div class="meta-row">
+        <div class="spinner" aria-hidden="true" data-role="spinner"></div>
+        <p class="error-message" role="status" aria-live="polite" data-role="error" hidden>❌ País não encontrado.</p>
+      </div>
+    </div>
+  </header>
+
+  <main id="explorar" class="container main-content">
+    <h2 class="section-title">Países em Destaque</h2>
+
+    <section class="countries card-grid" aria-live="polite" data-role="list">
+      
+      <article class="country-card" data-cca3="BRA">
+        <img class="country-flag" src="https://flagcdn.com/br.svg" alt="Bandeira do Brasil, verde, amarela e azul com estrelas" loading="lazy" />
+        <div class="card-body">
+          <h2 class="country-name">🇧🇷 Brasil</h2>
+          <p class="country-capital"><strong>Capital:</strong> <span class="value">Brasília</span></p>
+          <p class="country-region"><strong>Região:</strong> <span class="value">Américas</span></p>
+          <p class="country-population"><strong>População:</strong> <span class="value">214,000,000</span></p>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary btn-details" data-role="details" aria-label="Ver detalhes do Brasil">Detalhes</button>
+          <button class="btn btn-ghost btn-fav" data-role="fav" aria-pressed="false" title="Adicionar aos favoritos">⭐</button>
+        </div>
+      </article>
+
+      <article class="country-card" data-cca3="FRA">
+        <img class="country-flag" src="https://flagcdn.com/fr.svg" alt="Bandeira da França, tricolor vertical azul, branco e vermelho" loading="lazy" />
+        <div class="card-body">
+          <h2 class="country-name">🇫🇷 França</h2>
+          <p class="country-capital"><strong>Capital:</strong> <span class="value">Paris</span></p>
+          <p class="country-region"><strong>Região:</strong> <span class="value">Europa</span></p>
+          <p class="country-population"><strong>População:</strong> <span class="value">67,400,000</span></p>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary btn-details" data-role="details" aria-label="Ver detalhes da França">Detalhes</button>
+          <button class="btn btn-ghost btn-fav" data-role="fav" aria-pressed="false" title="Adicionar aos favoritos">⭐</button>
+        </div>
+      </article>
+
+      <article class="country-card" data-cca3="JPN">
+        <img class="country-flag" src="https://flagcdn.com/jp.svg" alt="Bandeira do Japão, fundo branco com um círculo vermelho no centro" loading="lazy" />
+        <div class="card-body">
+          <h2 class="country-name">🇯🇵 Japão</h2>
+          <p class="country-capital"><strong>Capital:</strong> <span class="value">Tóquio</span></p>
+          <p class="country-region"><strong>Região:</strong> <span class="value">Ásia</span></p>
+          <p class="country-population"><strong>População:</strong> <span class="value">125,700,000</span></p>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary btn-details" data-role="details" aria-label="Ver detalhes do Japão">Detalhes</button>
+          <button class="btn btn-ghost btn-fav" data-role="fav" aria-pressed="false" title="Adicionar aos favoritos">⭐</button>
+        </div>
+      </article>
+
+      </section>
+
+    <hr>
+
+    <aside id="favoritos" class="favorites" aria-label="Países favoritos" data-role="favorites">
+      <h3>⭐ Seus Países Favoritos</h3>
+      <ul class="fav-list">
+        <li class="fav-item-placeholder">Nenhum país adicionado aos favoritos ainda.</li>
+      </ul>
+      <button class="btn btn-tertiary btn-clear-favs" aria-label="Limpar todos os favoritos" hidden>Limpar Favoritos</button>
+    </aside>
+  </main>
+
+  <div class="modal" role="dialog" aria-modal="true" aria-hidden="true" data-role="modal">
+    <div class="modal-backdrop" data-role="modal-close"></div>
+    <div class="modal-panel" role="document">
+      <button class="modal-close" data-role="modal-close" aria-label="Fechar janela de detalhes">✖</button>
+      <div class="modal-content">
+        <header class="modal-header">
+          <img class="modal-flag flag-large" src="placeholder-flag.png" alt="Bandeira do país selecionado" />
+          <div>
+            <h2 class="modal-title">Nome oficial (Native Name)</h2>
+            <p class="modal-sub"><span data-field="region">Região</span> • <span data-field="subregion">Sub-região</span></p>
+          </div>
+        </header>
+
+        <section class="modal-body">
+          <dl class="details-list">
+            <div class="detail">
+              <dt>Capital</dt><dd data-field="capital">**—**</dd>
+            </div>
+            <div class="detail">
+              <dt>População</dt><dd data-field="population">**—**</dd>
+            </div>
+            <div class="detail">
+              <dt>Área</dt><dd data-field="area">**—** km²</dd>
+            </div>
+            <div class="detail">
+              <dt>Idiomas Oficiais</dt><dd data-field="languages">**—**</dd>
+            </div>
+            <div class="detail">
+              <dt>Moedas (Símbolo)</dt><dd data-field="currencies">**—**</dd>
+            </div>
+            <div class="detail">
+              <dt>Domínios TLD</dt><dd data-field="domains">**—**</dd>
+            </div>
+            <div class="detail">
+              <dt>Fronteiras</dt><dd data-field="borders">**—**</dd>
+            </div>
+            <div class="detail">
+              <dt>Fuso Horário</dt><dd data-field="timezones">**—**</dd>
+            </div>
+          </dl>
+
+          <div class="map-embed">
+            <h4>🗺 Localização no Mapa</h4>
+            <iframe title="Mapa do país" src="" data-role="map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <footer id="sobre" class="site-footer">
+    <div class="container footer-inner">
+      <section class="about">
+        <h3>💡 Sobre o Projeto</h3>
+        <p>Esta é uma aplicação interativa para **explorar informações de países** e suas culturas. Os dados são fornecidos pela **REST Countries API**. Desenvolvido com foco em usabilidade e boas práticas de Programação Web.</p>
+      </section>
+
+      <section class="authors">
+        <h4>🛠 Integrantes da Equipe</h4>
+        <ul>
+          <li>Levi Ribeiro Passos </li>
+          <li>Irapuam Junio</li>
+          <li>Mayara Lima</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>Dados fornecidos pela <a href="https://restcountries.com/" target="_blank" rel="noopener noreferrer">REST Countries API</a>.</p>
+      <p>© <span id="year"></span>Levi Ribeiro Passos, Irapuam Junio, Mayara Lima. </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
