@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sobre - Explorador de Países e Culturas</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        🌍 Explorador de Países
+      </a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="index.html#explorar" class="nav-link">Explorar</a>
+        <a href="index.html#favoritos" class="nav-link">Favoritos</a>
+        <a href="sobre.html" class="nav-link active">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <section class="about-section">
+      <h2>Sobre a Equipe</h2>
+      <p>Esta aplicação foi desenvolvida para a 3ª Avaliação da disciplina de Programação Web da Universidade Estadual do Piauí - UESPI.</p>
+
+      <div class="team-members">
+        <article class="member-card">
+          <h3>Levi Ribeiro Passos</h3>
+          <p>Desenvolvedor Frontend</p>
+        </article>
+        <article class="member-card">
+          <h3>Irapuam Junio</h3>
+          <p>Desenvolvedor Frontend</p>
+        </article>
+        <article class="member-card">
+          <h3>Mayara Lima</h3>
+          <p>Desenvolvedora Frontend</p>
+        </article>
+      </div>
+      <div class="api-credits">
+        <h3>Créditos e Agradecimentos</h3>
+        <div class="api-info">
+          <div class="api-logo">
+            <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">🌐</span>
+            <h4>REST Countries API</h4>
+          </div>
+          <div class="api-details">
+            <p>Este projeto utiliza a <strong>REST Countries API</strong> para obter informações sobre países ao redor do mundo.</p>
+            <p>A REST Countries API é um serviço gratuito que disponibiliza dados atualizados sobre países, incluindo informações geográficas, demográficas, culturais e políticas.</p>
+            <p>Agradecemos à REST Countries por fornecer uma API robusta e documentação completa que tornou este projeto possível.</p>
+            <div class="api-links">
+              <a href="https://restcountries.com/" target="_blank" class="btn-api">Visitar REST Countries</a>
+              <a href="https://restcountries.com/#api-endpoints-v3-all" target="_blank" class="btn-api">Documentação da API</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tech-stack">
+        <h3>Tecnologias Utilizadas</h3>
+        <div class="tech-list">
+          <span class="tech-item">HTML5</span>
+          <span class="tech-item">CSS3</span>
+          <span class="tech-item">JavaScript ES6+</span>
+          <span class="tech-item">REST Countries API</span>
+          <span class="tech-item">Fetch API</span>
+          <span class="tech-item">LocalStorage</span>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>Dados fornecidos pela <a href="https://restcountries.com/" target="_blank" rel="noopener noreferrer">REST Countries API</a>.</p>
+      <p>© <span id="year"></span> Levi Ribeiro Passos, Irapuam Junio, Mayara Lima.</p>
+    </div>
+  </footer>
+
+  <button class="theme-toggle" aria-label="Alternar tema" title="Alternar entre modo claro e escuro">🌓</button>
+  
+  <script>
+    const themeToggle = document.querySelector('.theme-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+    
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    }
+    
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else if (prefersDark.matches) {
+      setTheme('dark');
+    }
+    
+    themeToggle.addEventListener('click', toggleTheme);
+    
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      if (link.href === window.location.href) {
+        link.classList.add('active');
+      }
+    });
+  </script>
+</body>
+</html>

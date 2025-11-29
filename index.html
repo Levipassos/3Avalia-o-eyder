@@ -9,11 +9,13 @@
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <h1 class="brand">🌍 Explorador de Países</h1>
+      <a href="#" class="brand">
+        🌍 Explorador de Países
+      </a>
       <nav class="main-nav" aria-label="Navegação principal">
         <a href="#explorar" class="nav-link">Explorar</a>
         <a href="#favoritos" class="nav-link">Favoritos</a>
-        <a href="#sobre" class="nav-link">Sobre</a>
+        <a href="sobre.html" class="nav-link">Sobre</a>
       </nav>
     </div>
     <div class="container searchbar">
@@ -29,13 +31,12 @@
           <option value="Oceania">Oceania</option>
           <option value="Antarctic">Antártica</option>
         </select>
-        <button class="btn btn-secondary" aria-label="Limpar filtros e busca">Limpar</button>
       </div>
       <div class="meta-row">
         <div class="spinner" aria-hidden="true" data-role="spinner"></div>
         <p class="error-message" role="status" aria-live="polite" data-role="error" hidden>❌ País não encontrado.</p>
       </div>
-    </div>
+  </div>
   </header>
 
   <main id="explorar" class="container main-content">
@@ -148,31 +149,40 @@
     </div>
   </div>
 
-  <footer id="sobre" class="site-footer">
-    <div class="container footer-inner">
-      <section class="about">
-        <h3>💡 Sobre o Projeto</h3>
-        <p>Esta é uma aplicação interativa para **explorar informações de países** e suas culturas. Os dados são fornecidos pela **REST Countries API**. Desenvolvido com foco em usabilidade e boas práticas de Programação Web.</p>
-      </section>
-
-      <section class="authors">
-        <h4>🛠 Integrantes da Equipe</h4>
-        <ul>
-          <li>Levi Ribeiro Passos </li>
-          <li>Irapuam Junio</li>
-          <li>Mayara Lima</li>
-        </ul>
-      </section>
-    </div>
-
+  <footer class="site-footer">
     <div class="container footer-bottom">
       <p>Dados fornecidos pela <a href="https://restcountries.com/" target="_blank" rel="noopener noreferrer">REST Countries API</a>.</p>
-      <p>© <span id="year"></span>Levi Ribeiro Passos, Irapuam Junio, Mayara Lima. </p>
+      <p>© <span id="year"></span> Levi Ribeiro Passos, Irapuam Junio, Mayara Lima.</p>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <button class="theme-toggle" aria-label="Alternar tema" title="Alternar entre modo claro e escuro">🌓</button>
+  <script>
+    const themeToggle = document.querySelector('.theme-toggle');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+    
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    }
+    
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else if (prefersDark.matches) {
+      setTheme('dark');
+    }
+    
+    themeToggle.addEventListener('click', toggleTheme);
   </script>
 </body>
 </html>
