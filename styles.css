@@ -1,5 +1,4 @@
 :root {
-  /* Cores modo claro */
   --bg-light: #f8fbf9;
   --card-light: #ffffff;
   --accent-light: #2196f3;
@@ -9,8 +8,6 @@
   --text-light: #1a1a1a;
   --muted-light: #4a5568;
   --border-light: #e2e8f0;
-  
-  /* Cores modo escuro */
   --bg-dark: #0f172a;
   --card-dark: #1e293b;
   --accent-dark: #60a5fa;
@@ -20,7 +17,6 @@
   --text-dark: #f1f5f9;
   --muted-dark: #cbd5e1;
   --border-dark: #334155;
-
   --danger: #ef4444;
   --warning: #f59e0b;
   --radius: 8px;
@@ -28,7 +24,6 @@
   --gap: 1rem;
   --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-dark: 0 2px 8px rgba(0, 0, 0, 0.3);
-  
   --bg: var(--bg-light);
   --card: var(--card-light);
   --accent: var(--accent-light);
@@ -130,6 +125,11 @@ body {
   background: var(--bg);
 }
 
+.nav-link.active {
+  background: var(--success);
+  color: white;
+}
+
 .searchbar {
   margin-top: 1.5rem;
   background: linear-gradient(135deg, var(--success) 0%, var(--accent) 100%);
@@ -149,6 +149,7 @@ body {
   display: flex;
   gap: 1rem;
   align-items: center;
+  position: relative;
 }
 
 input[type="search"] {
@@ -191,6 +192,17 @@ select:focus {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
+.meta-row {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .btn {
   padding: 0.6rem 1rem;
   border: none;
@@ -222,9 +234,38 @@ select:focus {
   border-color: var(--accent);
 }
 
+.btn-tertiary {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-tertiary:hover {
+  background: #d32f2f;
+  transform: translateY(-1px);
+}
+
 .btn-fav[aria-pressed="true"] {
   color: var(--warning);
+  background: rgba(245, 158, 11, 0.1);
   transform: scale(1.05);
+}
+
+.btn-api {
+  background: var(--success);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-api:hover {
+  background: var(--success-2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .main-content {
@@ -303,6 +344,8 @@ select:focus {
   margin: 2rem 0;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
+  position: sticky;
+  top: 100px;
 }
 
 .favorites h3 {
@@ -322,17 +365,49 @@ select:focus {
 }
 
 .fav-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: var(--success);
   color: white;
-  padding: 0.4rem 0.8rem;
-  border-radius: 16px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 20px;
   font-weight: 600;
   font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.fav-item:hover {
+  background: var(--success-2);
+  transform: translateY(-1px);
 }
 
 .fav-item-placeholder {
   color: var(--muted);
   font-style: italic;
+  padding: 0.5rem;
+}
+
+.btn-remove-fav {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.btn-remove-fav:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
 }
 
 .modal {
@@ -419,35 +494,6 @@ select:focus {
   border-top: 1px solid var(--border);
 }
 
-.footer-inner {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.about, .authors {
-  padding: 1rem;
-  background: var(--bg);
-  border-radius: var(--radius);
-}
-
-.about h3, .authors h4 {
-  margin-top: 0;
-  color: var(--text);
-  font-size: 1rem;
-}
-
-.about p, .authors ul {
-  font-size: 0.85rem;
-  margin: 0.5rem 0;
-  color: var(--muted);
-}
-
-.authors ul {
-  padding-left: 1rem;
-}
-
 .footer-bottom {
   border-top: 1px solid var(--border);
   padding-top: 1rem;
@@ -478,13 +524,14 @@ select:focus {
 }
 
 .spinner {
-  width: 1.25rem;
-  height: 1.25rem;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top: 2px solid white;
+  width: 2rem;
+  height: 2rem;
+  border: 3px solid var(--border);
+  border-top: 3px solid var(--success);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   display: none;
+  margin: 1rem auto;
 }
 
 @keyframes spin {
@@ -493,75 +540,22 @@ select:focus {
 }
 
 .error-message {
-  color: white;
-  background: rgba(239, 68, 68, 0.8);
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid rgba(239, 68, 68, 0.3);
   font-weight: 600;
-  font-size: 0.85rem;
+  text-align: center;
+  margin: 1rem 0;
 }
 
-@media (max-width: 768px) {
-  .header-inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.75rem;
-  }
-  
-  .brand {
-    font-size: 1.1rem;
-  }
-  
-  .main-nav {
-    justify-content: center;
-  }
-  
-  .search-row {
-    flex-direction: column;
-  }
-  
-  .countries {
-    grid-template-columns: 1fr;
-  }
-  
-  .theme-toggle {
-    bottom: 0.5rem;
-    right: 0.5rem;
-    width: 40px;
-    height: 40px;
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .container {
-    width: 95%;
-    padding: 0 0.5rem;
-  }
-  
-  .nav-link {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.8rem;
-  }
-  
-  .brand {
-    font-size: 1rem;
-  }
-  
-  .section-title {
-    font-size: 1.25rem;
-  }
-  
-  .country-card {
-    grid-template-columns: 70px 1fr auto;
-    gap: 0.5rem;
-    padding: 0.75rem;
-  }
-  
-  .country-flag {
-    width: 70px;
-    height: 50px;
-  }
+.no-results {
+  text-align: center;
+  padding: 3rem;
+  color: var(--muted);
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
 }
 
 .about-section {
@@ -673,24 +667,6 @@ select:focus {
   flex-wrap: wrap;
 }
 
-.btn-api {
-  background: var(--success);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-api:hover {
-  background: var(--success-2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
 .tech-stack {
   margin: 3rem 0;
   text-align: center;
@@ -725,46 +701,41 @@ select:focus {
   transform: translateY(-2px);
 }
 
-.project-info {
-  background: var(--card);
-  padding: 2.5rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
-  margin: 3rem 0;
-}
-
-.project-info h3 {
-  color: var(--text);
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
-  text-align: center;
-  font-weight: 700;
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.info-item {
-  padding: 1rem;
-  background: var(--bg);
-  border-radius: var(--radius);
-  color: var(--text);
-}
-
-.info-item strong {
-  color: var(--success);
-}
-
-.nav-link.active {
-  background: var(--success);
-  color: white;
-}
-
 @media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  
+  .brand {
+    font-size: 1.1rem;
+  }
+  
+  .main-nav {
+    justify-content: center;
+  }
+  
+  .search-row {
+    flex-direction: column;
+  }
+  
+  .countries {
+    grid-template-columns: 1fr;
+  }
+  
+  .theme-toggle {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .favorites {
+    position: static;
+  }
+  
   .about-section h2 {
     font-size: 2rem;
   }
@@ -796,18 +767,42 @@ select:focus {
     font-size: 0.85rem;
   }
   
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .member-card,
-  .api-credits,
-  .project-info {
+  .api-credits {
     padding: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
+  .container {
+    width: 95%;
+    padding: 0 0.5rem;
+  }
+  
+  .nav-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+  
+  .brand {
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 1.25rem;
+  }
+  
+  .country-card {
+    grid-template-columns: 70px 1fr auto;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+  
+  .country-flag {
+    width: 70px;
+    height: 50px;
+  }
+  
   .about-section {
     padding: 1rem 0;
   }
