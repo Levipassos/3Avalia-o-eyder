@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Detalhes do País - Explorador de Países e Culturas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">🌍 Explorador de Países</a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a href="index.html#explorar" class="nav-link">Explorar</a>
+        <a href="index.html#favoritos" class="nav-link">Favoritos</a>
+        <a href="sobre.html" class="nav-link">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <div class="breadcrumb">
+      <a href="index.html">← Voltar para explorar</a>
+    </div>
+
+    <section id="country-details" class="country-details-section">
+      <div class="details-content">
+        <div class="country-header">
+          <div class="flag-container">
+            <img id="country-flag" src="" alt="Bandeira do país" class="flag-large">
+          </div>
+          
+          <div class="fav-button-container">
+            <button id="favorite-btn" class="btn-fav-details" aria-pressed="false" title="Adicionar aos favoritos">
+              <span id="favorite-star">⭐</span>
+            </button>
+          </div>
+          
+          <div class="country-title">
+            <h1 id="country-name">Carregando dados do país...</h1>
+            <p id="country-official-name" class="official-name">Aguarde enquanto buscamos as informações</p>
+            <div class="country-tags">
+              <span class="tag" id="country-region">Região: buscando...</span>
+              <span class="tag" id="country-subregion">Sub-região: buscando...</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="details-grid">
+          <div class="info-card">
+            <h3>Informações Gerais</h3>
+            <div class="info-list">
+              <div class="info-item"><span class="info-label">Capital</span><span id="country-capital" class="info-value">Carregando...</span></div>
+              <div class="info-item"><span class="info-label">População</span><span id="country-population" class="info-value">Carregando...</span></div>
+              <div class="info-item"><span class="info-label">Área</span><span id="country-area" class="info-value">Carregando... km²</span></div>
+              <div class="info-item"><span class="info-label">Fuso Horário</span><span id="country-timezone" class="info-value">Carregando...</span></div>
+              <div class="info-item"><span class="info-label">Código de Ligação</span><span id="country-callingcode" class="info-value">Carregando...</span></div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3>Dados Econômicos</h3>
+            <div class="info-list">
+              <div class="info-item"><span class="info-label">Moeda</span><span id="country-currency" class="info-value">Carregando...</span></div>
+              <div class="info-item"><span class="info-label">Domínio de Internet</span><span id="country-domain" class="info-value">Carregando...</span></div>
+              <div class="info-item"><span class="info-label">Sigla do País</span><span id="country-code" class="info-value">Carregando...</span></div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3>Idiomas</h3>
+            <div class="languages-list" id="country-languages">
+              <span class="language-tag">Carregando...</span>
+            </div>
+          </div>
+
+          <div class="info-card full-width">
+            <h3>Localização Geográfica</h3>
+            <div class="map-container">
+              <iframe id="country-map" src="" title="Mapa do país" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <div class="coordinate-info">
+                <div class="coordinate"><span class="coord-label">Latitude:</span><span id="country-latitude" class="coord-value">0°</span></div>
+                <div class="coordinate"><span class="coord-label">Longitude:</span><span id="country-longitude" class="coord-value">0°</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card" id="borders-card">
+            <h3>Países Vizinhos</h3>
+            <div class="borders-list" id="country-borders">
+              <span class="border-item">Nenhum país vizinho</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3>Informações Políticas</h3>
+            <div class="info-list">
+              <div class="info-item"><span class="info-label">Status Independente</span><span id="country-independence" class="info-value">Carregando...</span></div>
+              <div class="info-item"><span class="info-label">Lado da Via</span><span id="country-driving-side" class="info-value">Carregando...</span></div>
+              <div class="info-item"><span class="info-label">Capital</span><span id="country-capital-repeat" class="info-value">Carregando...</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="additional-info">
+          <h3>Informações Adicionais</h3>
+          <div class="additional-grid">
+            <div class="additional-item">
+              <h4>Brasão de Armas</h4>
+              <img id="country-coat-of-arms" src="" alt="Brasão de armas" class="coat-of-arms" style="display: none">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="error-message" class="error-message" hidden>
+      <h3>Erro ao carregar dados do país</h3>
+      <p>Não foi possível carregar as informações do país solicitado.</p>
+      <p>Verifique se o código do país está correto ou tente novamente mais tarde.</p>
+      <a href="index.html" class="btn btn-primary">Voltar para a página principal</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <p>Dados fornecidos pela <a href="https://restcountries.com/" target="_blank" rel="noopener noreferrer">REST Countries API</a>.</p>
+      <p>© <span id="year"></span> Levi Ribeiro Passos, Irapuam Junio, Mayara Lima.</p>
+    </div>
+  </footer>
+
+  <button class="theme-toggle" aria-label="Alternar tema" title="Alternar entre modo claro e escuro">🌓</button>
+
+  <script type="module" src="./js/detalhes.js"></script>
+</body>
+</html>
